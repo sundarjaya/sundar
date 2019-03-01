@@ -24,14 +24,14 @@ public class UserServiceController {
 	 
 	
     @RequestMapping(value = "/view/{id}", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> showUser(@RequestHeader HttpHeaders headers,@PathVariable Long id){
+    public ResponseEntity<User> showUser(@RequestHeader HttpHeaders headers,@PathVariable(value = "id", required = true)  Long id ){
         User user = userService.searchUser(id);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
     
 	
     @RequestMapping(value = "/search/{id}", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> searchUser(@RequestHeader HttpHeaders headers, @PathVariable Long id){
+    public ResponseEntity<User> searchUser(@RequestHeader HttpHeaders headers, @PathVariable(value = "id", required = true) Long id){
     	User user = userService.searchUser(id);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
@@ -43,7 +43,7 @@ public class UserServiceController {
     }
     
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> updateUser(@RequestHeader HttpHeaders headers, @PathVariable Long id, @RequestBody User request){
+    public ResponseEntity<User> updateUser(@RequestHeader HttpHeaders headers, @PathVariable(value = "id", required = true) Long id, @RequestBody User request){
     	
         User user =  userService.searchUser(id);
         user.setFirstName(request.getFirstName());
