@@ -1,0 +1,39 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+ 
+    <!-- Using H2 in memory database, if you are using some other database, 
+        make sure to change this and add the database specific drivers as dependencies 
+        to your pom.xml file -->
+    <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"></property>
+        <property name="url"
+            value="jdbc:h2:mem:kalliphant-app;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"></property>
+        <property name="username" value="dummy_user"></property>
+        <property name="password" value="dummy_password"></property>
+    </bean>
+ 
+    <bean id="jpaVendorAdapter"
+        class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="showSql" value="true"></property>
+        <property name="generateDdl" value="true"></property>
+        <property name="database" value="H2"></property>
+    </bean>
+ 
+    <bean id="entityManagerFactory"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"></property>
+        <property name="packagesToScan" value="com.dbs.user.repository"></property>
+    </bean>
+ 
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"></bean>
+ 
+    <jpa:repositories base-package="com.dbs.user.repository"></jpa:repositories>
+ 
+</beans>
