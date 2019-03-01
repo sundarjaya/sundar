@@ -3,7 +3,6 @@ package com.dbs.api.gateway;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
