@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dbs.user.entity.User;
-import com.dbs.user.service.UserService;
 import com.dbs.user.service.UserServiceImpl;
 
 @RestController
